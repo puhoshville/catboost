@@ -255,8 +255,8 @@ class Pool(_PoolBase):
     def _check_delimiter(self, delimiter):
         if not isinstance(delimiter, STRING_TYPES):
             raise CatboostError("Invalid delimiter type={} : must be str().".format(type(delimiter)))
-        if len(delimiter) < 1:
-            raise CatboostError("Invalid delimiter length={} : must be > 0.".format(len(delimiter)))
+        if len(delimiter) != 1:
+            raise CatboostError("Invalid delimiter length={} : must be == 1".format(len(delimiter)))
 
     def _check_column_description_type(self, column_description):
         """
@@ -522,7 +522,7 @@ class Pool(_PoolBase):
             if pairs is None:
                 pairs = ''
             self._check_thread_count(thread_count)
-            self._read_pool(pool_file, column_description, pairs, delimiter[0], has_header, thread_count)
+            self._read_pool(pool_file, column_description, pairs, delimiter, has_header, thread_count)
 
     def _init(self, data_matrix, label, cat_features, pairs, weight, group_id, group_weight, subgroup_id, pairs_weight, baseline, feature_names):
         """
