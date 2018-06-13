@@ -4,6 +4,13 @@ import glob
 
 import webdav.client
 
+if not "WEBDAV_LOGIN" in os.environ.keys():
+    print("No Login in environments for WebDav authorization")
+    exit(0)
+if not "WEBDAV_PASSWORD" in os.environ.keys():
+    print("No Password in environments for WebDav authorization")
+    exit(0)
+
 client = webdav.client.Client({
     "webdav_hostname": "https://webdav.yandex.ru",
     "webdav_login":    os.environ["WEBDAV_LOGIN"],
